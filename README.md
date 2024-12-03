@@ -193,6 +193,70 @@
       autoIndexId: true
     });
 
+
+## STATE 
+        db.createCollection("states", {
+          validator: {
+            $jsonSchema: {
+              bsonType: "object",
+              required: ["state_code", "name", "shortname", "sequence", "remarks", "status", "created_on", "last_modified"],
+              properties: {
+                state_code: { bsonType: "int", description: "Must be an integer and is required." },
+                name: { bsonType: "string", description: "Must be a string and is required." },
+                shortname: { bsonType: "string", description: "Must be a string and is required." },
+                sequence: { bsonType: "int", description: "Must be an integer and is required." },
+                remarks: { bsonType: "string", description: "Must be a string and is required." },
+                status: { bsonType: "string", enum: ["ENABLE", "DISABLE"], description: "Must be a string and one of the predefined values." },
+                is_deleted: { bsonType: "string", enum: ["YES", "NO"], description: "Must be a string and one of the predefined values." },
+                created_on: { bsonType: "date", description: "Must be a date and is required." },
+                last_modified: { bsonType: "date", description: "Must be a date and is required." }
+              }
+            }
+          },
+          autoIndexId: true
+        });
+
+
+## DISTRICT 
+    db.districts.insertOne({
+      state_code: 1,
+      district_code: 8,
+      name: "District Name",
+      sequence: 1,
+      remarks: "District remarks",
+      status: "ENABLE",
+      is_deleted: "NO",
+      created_on: ISODate("2024-01-01T10:00:00Z"),
+      last_modified: ISODate("2024-01-02T12:00:00Z")
+    });
+
+
+## CITY
+        db.createCollection("cities", {
+          validator: {
+            $jsonSchema: {
+              bsonType: "object",
+              required: ["state_code", "district_code", "city_code", "name", "sequence", "remarks", "status", "created_on", "last_modified"],
+              properties: {
+                state_code: { bsonType: "int", description: "Must be an integer and is required." },
+                district_code: { bsonType: "int", description: "Must be an integer and is required." },
+                city_code: { bsonType: "int", description: "Must be an integer and is required." },
+                name: { bsonType: "string", description: "Must be a string and is required." },
+                sequence: { bsonType: "int", description: "Must be an integer and is required." },
+                remarks: { bsonType: "string", description: "Must be a string and is required." },
+                status: { bsonType: "string", enum: ["ENABLE", "DISABLE"], description: "Must be a string and one of the predefined values." },
+                is_deleted: { bsonType: "string", enum: ["YES", "NO"], description: "Must be a string and one of the predefined values." },
+                created_on: { bsonType: "date", description: "Must be a date and is required." },
+                last_modified: { bsonType: "date", description: "Must be a date and is required." }
+              }
+            }
+          },
+          autoIndexId: true
+        });
+
+
+
+
 ## CENTER MST
         db.createCollection("icad_center_mst", {
           validator: {
